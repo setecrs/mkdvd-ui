@@ -4,15 +4,15 @@ import PropTypes from 'prop-types';
 import App from '../components/app';
 import {
   chdir,
-  getDir,
+  gotoBasePath,
   subroutineSetParameter,
   subroutine,
 } from '../actions';
 
 class AppContainer extends Component {
   componentDidMount() {
-    const { getDir } = this.props;
-    getDir();
+    const { gotoBasePath } = this.props;
+    gotoBasePath();
   }
   render() {
     return (
@@ -21,7 +21,7 @@ class AppContainer extends Component {
   }
 }
 AppContainer.propTypes = {
-  getDir: PropTypes.func.isRequired
+  gotoBasePath: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -40,7 +40,7 @@ const mapDispatchToProps = dispatch => ({
   chdir: (path) => dispatch(chdir(path)),
   subroutineClick: (type) => dispatch(subroutine(type)),
   changeParameter: (key, value) => dispatch(subroutineSetParameter(key, value)),
-  getDir: () => dispatch(getDir()),
+  gotoBasePath: () => dispatch(gotoBasePath()),
 });
 
 export default connect(

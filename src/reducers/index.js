@@ -5,7 +5,7 @@ import subroutine from './subroutine';
 import getDir from './getdir';
 
 export const initialState = {
-  path: '/operacoes/',
+  path: '/',
   subroutines: [],
   content: [],
   getDir: {

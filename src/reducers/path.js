@@ -2,7 +2,7 @@ import {
   PATH_CHDIR
 } from '../actions';
 
-const initialState = '/operacoes/';
+const initialState = '/';
 
 const reducer = (state=initialState, action) => {
   switch (action.type) {

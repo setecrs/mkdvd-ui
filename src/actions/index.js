@@ -15,4 +15,5 @@ export {
 export {
   PATH_CHDIR,
   chdir,
+  gotoBasePath,
 } from './chdir';
