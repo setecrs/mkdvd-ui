@@ -1,6 +1,6 @@
 FROM node:8.4.0-alpine
 
-WORKDIR /usr/src/microservices-path-ui
+WORKDIR /usr/local/src/microservices-path-ui
 
 RUN npm i -g yarn
 COPY package.json .
@@ -11,5 +11,5 @@ ADD . .
 
 RUN npm run build
 
-VOLUME /usr/src/microservices-path-ui
+VOLUME /usr/local/src/microservices-path-ui
 CMD /bin/true
