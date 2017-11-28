@@ -12,7 +12,7 @@ export const subroutineStart = (type) => ({
 
 export const subroutineSetParameter = (key, value) => ({
   type: SUBROUTINE_SET_PARAMETER,
-  payload: { 
+  payload: {
     key,
     value
   }
@@ -32,10 +32,10 @@ export const subroutineDone = () => ({
   type: SUBROUTINE_DONE,
 });
 
-export const subroutine = (type) => (dispatch, getState) => {
+export const subroutine = (path, type) => (dispatch, getState) => {
   dispatch(subroutineStart(type));
   const state = getState();
-  apiSubroutine(type, state.path, state.subroutine.parameters)
+  apiSubroutine(type, path, state.subroutine.parameters)
     .then(res => {
       if (!res.ok){
         return res.json()

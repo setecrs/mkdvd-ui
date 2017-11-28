@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import SubroutineButton from './subroutine-button';
 
 const SubroutineList = ({
+  path,
   subroutineClick,
   subroutines,
 }) => (
@@ -10,6 +11,7 @@ const SubroutineList = ({
     {subroutines.map(subroutine => (
       <span key={subroutine}>
         <SubroutineButton
+          path={path}
           subroutine={subroutine}
           subroutineClick={subroutineClick}/>
         {' '}
@@ -19,6 +21,7 @@ const SubroutineList = ({
 );
 
 SubroutineList.propTypes = {
+  path: PropTypes.string.isRequired,
   subroutineClick: PropTypes.func.isRequired,
   subroutines: PropTypes.arrayOf(
     PropTypes.string

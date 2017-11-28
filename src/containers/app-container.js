@@ -38,7 +38,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   chdir: (path) => dispatch(chdir(path)),
-  subroutineClick: (type) => dispatch(subroutine(type)),
+  subroutineClick: (path, type) => dispatch(subroutine(path, type)),
   changeParameter: (key, value) => dispatch(subroutineSetParameter(key, value)),
   gotoBasePath: () => dispatch(gotoBasePath()),
 });

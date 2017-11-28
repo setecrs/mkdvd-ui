@@ -27,18 +27,41 @@ export const Parameters = ({
                     :''
                   }
                 </label>
-                <input type="text" className="form-control" id={key}
-                  value={parameters[key].value}
-                  onChange={(e) => {
-                    changeParameter(key, e.target.value);
-                  }}
-                />
+                {
+                  (parameters[key].type === 'options')
+                    ?
+                    <div key={key}>
+                      {parameters[key].options.map(option => (
+                        <label key={option['_id']}>
+                          <input
+                            name="_id"
+                            id="_id"
+                            type="radio"
+                            className="form-control"
+                            value={option['_id']}
+                            onChange={(e) => {
+                              changeParameter(key, e.target.value);
+                            }}
+                          />
+                          <pre>{JSON.stringify(option, null, 2)}</pre>
+                        </label>
+                      ))}
+                    </div>
+                    :
+                    <input type="text" className="form-control" id={key}
+                      value={parameters[key].value}
+                      onChange={(e) => {
+                        changeParameter(key, e.target.value);
+                      }}
+                    />
+                }
               </div>
           ))}
         </div>
       </div>
       <div className="row">
         <SubroutineButton
+          path={parameters.path.value}
           subroutine={subroutine}
           subroutineClick={subroutineClick}/>
       </div>

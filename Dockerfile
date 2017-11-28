@@ -9,7 +9,6 @@ RUN yarn
 
 ADD . .
 
-RUN npm run build
+VOLUME /usr/local/src/microservices-path-ui/build
 
-VOLUME /usr/local/src/microservices-path-ui
-CMD /bin/true
+CMD npm run build

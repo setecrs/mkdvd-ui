@@ -1,19 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import DirectoryItem from './ls-item';
+import LsItem from './ls-item';
 
 const Ls = ({
   items,
-  onClick
+  changeDir,
+  callAction,
 }) => (
   <div>
     <h3>Content:</h3>
     <ul>
       {items.map(item =>
-        <DirectoryItem
+        <LsItem
           key={item.path}
           {...item}
-          onClick={() => onClick(item.path)}
+          changeDir={changeDir}
+          callAction={callAction}
         />
       )}
     </ul>
@@ -25,9 +27,13 @@ Ls.propTypes = {
     PropTypes.shape({
       path: PropTypes.string.isRequired,
       isDir: PropTypes.bool.isRequired,
+      subroutines: PropTypes.arrayOf(
+        PropTypes.string
+      )
     })
   ),
-  onClick: PropTypes.func.isRequired
+  changeDir: PropTypes.func.isRequired,
+  callAction: PropTypes.func.isRequired,
 };
 
 export default Ls;

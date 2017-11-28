@@ -46,6 +46,7 @@ const App = ({
         :<div>
           <h3>Actions:</h3>
           <SubroutineList
+            path={path}
             subroutineClick={subroutineClick}
             subroutines={subroutines}
           />
@@ -57,7 +58,8 @@ const App = ({
       /></h2>
       <Ls
         items={content}
-        onClick={chdir}
+        changeDir={chdir}
+        callAction={subroutineClick}
       />
     </div>
     {mystate.subroutine.isFetching?
