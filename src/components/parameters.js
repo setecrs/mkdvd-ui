@@ -14,7 +14,8 @@ export const Parameters = ({
   }
   return (
     <div className="parameterForm row container">
-      <h2>{subroutine} parameters:</h2>
+      <h2>Action: {subroutine}</h2>
+      <h3>parameters:</h3>
       <div className="row">
         <div className='form-group col-md-8'>
           {Object.keys(parameters).map(key => (
@@ -43,7 +44,11 @@ export const Parameters = ({
                               changeParameter(key, e.target.value);
                             }}
                           />
-                          <pre>{JSON.stringify(option, null, 2)}</pre>
+                          {option.value?
+                            <pre>{option.value}</pre>
+                            :
+                            <pre>{JSON.stringify(option, null, 2)}</pre>
+                          }
                         </label>
                       ))}
                     </div>
@@ -61,7 +66,8 @@ export const Parameters = ({
       </div>
       <div className="row">
         <SubroutineButton
-          path={parameters.path.value}
+          label='Confirm'
+          path={(parameters.path||{}).value}
           subroutine={subroutine}
           subroutineClick={subroutineClick}/>
       </div>

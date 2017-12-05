@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 const SubroutineButton = ({
   path,
+  label,
   subroutine,
   subroutineClick,
 }) => (
@@ -12,11 +13,12 @@ const SubroutineButton = ({
     href="#"
     onClick={() => subroutineClick(path, subroutine)}
   >
-    {subroutine}
+    {label || subroutine}
   </button>
 );
 
 SubroutineButton.propTypes = {
+  label: PropTypes.string,
   path: PropTypes.string.isRequired,
   subroutineClick: PropTypes.func.isRequired,
   subroutine: PropTypes.string.isRequired

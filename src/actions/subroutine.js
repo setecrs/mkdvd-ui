@@ -1,4 +1,5 @@
 import { apiSubroutine } from '../external';
+import { getDir } from './getdir';
 
 export const SUBROUTINE_START = 'SUBROUTINE_START';
 export const SUBROUTINE_CANCEL = 'SUBROUTINE_CANCEL';
@@ -35,7 +36,7 @@ export const subroutineDone = () => ({
 export const subroutine = (path, type) => (dispatch, getState) => {
   dispatch(subroutineStart(type));
   const state = getState();
-  apiSubroutine(type, path, state.subroutine.parameters)
+  return apiSubroutine(type, path, state.subroutine.parameters)
     .then(res => {
       if (!res.ok){
         return res.json()
@@ -46,7 +47,10 @@ export const subroutine = (path, type) => (dispatch, getState) => {
             return dispatch(subroutineCancel(json.message));
           });
       }
-      return dispatch(subroutineDone());
+      return Promise.resolve()
+        .then(() => dispatch(getDir()))
+        .then(() => dispatch(subroutineStart(type)))
+        .then(() => dispatch(subroutineDone()));
     })
     .catch(error => {
       dispatch(subroutineCancel(error));
