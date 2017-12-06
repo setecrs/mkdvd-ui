@@ -22,7 +22,6 @@ const App = ({
   subroutineParameters,
   getDirError,
   subroutines,
-  chdir,
   subroutineClick,
   changeParameter,
 }) => (
@@ -54,11 +53,9 @@ const App = ({
       <h3>Path:</h3>
       <h2><ClickablePath
         path={path}
-        chdir={chdir}
       /></h2>
       <Ls
         items={content}
-        changeDir={chdir}
         callAction={subroutineClick}
       />
     </div>
@@ -83,7 +80,6 @@ App.propTypes = {
   subroutineParameters: PropTypes.object,
   subroutines: PropTypes.arrayOf(PropTypes.string).isRequired,
   successAction: PropTypes.string,
-  chdir: PropTypes.func.isRequired,
   subroutineClick: PropTypes.func.isRequired,
   changeParameter: PropTypes.func.isRequired,
 };

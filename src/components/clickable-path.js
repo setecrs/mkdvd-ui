@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const ClickablePath = ({
   path,
-  chdir
 }) => {
   const splited = path.split('/').filter(x => !!x);
   let fullname = '';
@@ -16,17 +16,14 @@ const ClickablePath = ({
   return parts.map(({basename, fullname}) => (
     <span key={fullname} >
       {'/'}
-      <button
-        type="button"
-        className="path-btn btn btn-link"
-        onClick={() => chdir(fullname)}
-      >{basename}</button>
+      <Link to={fullname}>
+        {basename}
+      </Link>
     </span>
   ));
 };
 ClickablePath.propTypes = ({
   path: PropTypes.string.isRequired,
-  chdir: PropTypes.func.isRequired,
 });
 
 export default ClickablePath;

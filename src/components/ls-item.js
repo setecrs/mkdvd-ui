@@ -3,24 +3,20 @@ import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.css';
 import { basename } from 'path';
 import SubroutineButton from './subroutine-button';
+import { Link } from 'react-router-dom';
 
 const LsItem = ({
   path,
   isDir,
   subroutines,
-  changeDir,
   callAction,
 }) => (
   <div className="container">
     <li>
       {isDir?
-        <button
-          type="button"
-          className="btn btn-default btn-xs"
-          onClick={() => changeDir(path)}
-        >
+        <Link to={path}>
           {basename(path)}
-        </button>
+        </Link>
         :(<span>
           {basename(path)}
           {subroutines.map(s => (
@@ -44,7 +40,6 @@ LsItem.propTypes = {
   subroutines: PropTypes.arrayOf(
     PropTypes.string
   ).isRequired,
-  changeDir: PropTypes.func.isRequired,
   callAction: PropTypes.func.isRequired,
 };
 

@@ -4,7 +4,6 @@ import LsItem from './ls-item';
 
 const Ls = ({
   items,
-  changeDir,
   callAction,
 }) => (
   <div>
@@ -14,7 +13,6 @@ const Ls = ({
         <LsItem
           key={item.path}
           {...item}
-          changeDir={changeDir}
           callAction={callAction}
         />
       )}
@@ -32,7 +30,6 @@ Ls.propTypes = {
       )
     })
   ),
-  changeDir: PropTypes.func.isRequired,
   callAction: PropTypes.func.isRequired,
 };
 

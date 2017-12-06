@@ -21,15 +21,10 @@ export const initialState = {
   },
 };
 
-const rootReducer = (state, action) => {
-  const newState = ({
-    path: path((state || {}).path, action),
-    content: content((state || {}).content, action),
-    subroutines: subroutines((state || {}).subroutines, action),
-    getDir: getDir((state || {}).getDir, action),
-    subroutine: subroutine((state || {}).subroutine, action),
-  });
-  return newState;
+export const reducers = {
+  path,
+  content,
+  subroutines,
+  getDir,
+  subroutine,
 };
-
-export default rootReducer;

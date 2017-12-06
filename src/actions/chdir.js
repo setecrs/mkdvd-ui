@@ -10,7 +10,6 @@ export const chdir = (path) => dispatch => {
 };
 
 export const gotoBasePath = () => (dispatch) => {
-  console.log()
   apiGetBasePath()
     .then(res => {
       if (res.status === 403) { return Promise.reject('Forbidden'); }
