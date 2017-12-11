@@ -1,6 +1,7 @@
 import { apiSubroutine } from "../external";
 import { getDir } from "./getdir";
 import { chdir } from "./chdir";
+import ospath from "path";
 
 export const SUBROUTINE_START = "SUBROUTINE_START";
 export const SUBROUTINE_CANCEL = "SUBROUTINE_CANCEL";
@@ -54,7 +55,7 @@ export const subroutine = (path, type) => (dispatch, getState) => {
               .json()
               .then(json => json.destination)
               .then(destination => {
-                return dispatch(chdir(destination));
+                return dispatch(chdir(ospath.dirname(destination)));
               })
               .catch(() => {
                 return dispatch(getDir());
