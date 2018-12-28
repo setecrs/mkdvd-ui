@@ -15,7 +15,7 @@ export const getRunCancel = error => ({
 
 export const getRunDone = payload => ({
   type: GETRUN_DONE,
-  payload
+  payload: payload.running
 });
 
 export const getRun = () => (dispatch, getState) => {
@@ -34,6 +34,6 @@ export const getRun = () => (dispatch, getState) => {
     })
     .then(payload => dispatch(getRunDone(payload)))
     .catch(error => {
-      dispatch(getDirCancel(error));
+      dispatch(getRunCancel(error));
     });
 };

@@ -68,7 +68,13 @@ const App = ({
             <li>
               {k}
               <br/>
-              {running[k]}
+	      <ul>
+                {Object.keys(running[k]).map(k2 => (
+                <li>
+                  {k2}: {JSON.stringify(running[k][k2])}
+                </li>
+                ))}
+              </ul>
             </li>
           ))}
         </ul>
