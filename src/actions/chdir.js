@@ -7,6 +7,7 @@ export const chdir = (path) => dispatch => {
     payload: {path}
   });
   dispatch(getDir());
+  dispatch(getRun())
 };
 
 export const gotoBasePath = () => (dispatch) => {

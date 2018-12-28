@@ -1,4 +1,3 @@
-import querystring from 'querystring';
 import fetch from 'node-fetch';
 
 export const apiGetRun = () => {
