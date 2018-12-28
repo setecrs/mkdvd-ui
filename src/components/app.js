@@ -62,7 +62,7 @@ const App = ({
         callAction={subroutineClick}
       />
       <div>
-        <h3>Content:</h3>
+        <h3>Running log:</h3>
         <ul>
           {Object.keys(running).map(k => (
             <li>
