@@ -3,6 +3,7 @@ import content from './content';
 import subroutines from './subroutines';
 import subroutine from './subroutine';
 import getDir from './getdir';
+import getRun from './getrun';
 
 export const initialState = {
   path: '/',
@@ -26,5 +27,6 @@ export const reducers = {
   content,
   subroutines,
   getDir,
+  getRun,
   subroutine,
 };

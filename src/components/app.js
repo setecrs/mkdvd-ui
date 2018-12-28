@@ -21,6 +21,8 @@ const App = ({
   subroutineError,
   subroutineParameters,
   getDirError,
+  getRunError,
+  running,
   subroutines,
   subroutineClick,
   changeParameter,
@@ -35,6 +37,7 @@ const App = ({
       <Success action={successAction}/>
       <Error message={subroutineError}/>
       <Error message={getDirError}/>
+      <Error message={getRunError}/>
       {(subroutineParameters && (Object.keys(subroutineParameters).length !== 0))?
         <Parameters
           subroutine={subroutine}
@@ -58,6 +61,18 @@ const App = ({
         items={content}
         callAction={subroutineClick}
       />
+      <div>
+        <h3>Content:</h3>
+        <ul>
+          {Object.keys(running).map(k => (
+            <li>
+              {k}
+              <br/>
+              {running[k]}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
     {mystate.subroutine.isFetching?
       <div id="cover"></div>
@@ -76,6 +91,8 @@ App.propTypes = {
   ).isRequired,
   subroutine: PropTypes.string,
   getDirError: PropTypes.string,
+  getRunError: PropTypes.string,
+  running: PropTypes.object,
   subroutineError: PropTypes.string,
   subroutineParameters: PropTypes.object,
   subroutines: PropTypes.arrayOf(PropTypes.string).isRequired,

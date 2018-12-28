@@ -34,6 +34,8 @@ const mapStateToProps = state => ({
   subroutineParameters: state.subroutine.parameters,
   subroutineError: state.subroutine.error,
   getDirError: state.getDir.error,
+  getRunError: state.getRun.error,
+  running: state.getRun.payload,
   router: state.router,
 });
 
