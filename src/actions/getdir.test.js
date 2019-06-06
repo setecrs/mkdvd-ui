@@ -1,7 +1,7 @@
 /*eslint-env jest*/
 
-import rootReducer, { initialState } from '../reducers/index';
-import { createStore, applyMiddleware } from 'redux';
+import { reducers, initialState } from '../reducers/index';
+import { combineReducers, createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import {
   getDirStart,
@@ -14,7 +14,9 @@ import nock from 'nock';
 describe('getDir', () => {
   it('getDirStart', () => {
     const store = createStore(
-      rootReducer,
+      combineReducers({
+        ...reducers,
+      }),
       applyMiddleware(thunk)
     );
 
@@ -29,7 +31,9 @@ describe('getDir', () => {
   });
   it('getDirCancel', () => {
     const store = createStore(
-      rootReducer,
+      combineReducers({
+        ...reducers,
+      }),
       applyMiddleware(thunk)
     );
 
@@ -45,7 +49,9 @@ describe('getDir', () => {
   });
   it('getDirDone', () => {
     const store = createStore(
-      rootReducer,
+      combineReducers({
+        ...reducers,
+      }),
       applyMiddleware(thunk)
     );
 
@@ -66,16 +72,18 @@ describe('getDir', () => {
   });
   it('getDir', done => {
     nock(process.env.REACT_APP_APIURL)
-      .get('/v2/directory?path=%2Foperacoes%2F')
+      .get('/v2/directory?path=%2F')
       .reply(200, {
         content: ['a','b','c'],
         subroutines: ['d', 'e'],
       });
     const store = createStore(
-      rootReducer,
+      combineReducers({
+        ...reducers,
+      }),
       applyMiddleware(thunk)
     );
-    store.dispatch(getDir('/'));
+    store.dispatch(getDir());
     store.subscribe(() => {
       const state = store.getState();
       expect(state).toEqual(Object.assign({},initialState,{

@@ -1,12 +1,12 @@
 /*eslint-env jest*/
-import rootReducer, { initialState } from './index';
-import { createStore, applyMiddleware } from 'redux';
+import { reducers, initialState } from './index';
+import { combineReducers, createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
 describe('rootReducer', () => {
   it('initialState', done => {
     const store = createStore(
-      rootReducer,
+      combineReducers({...reducers}),
       applyMiddleware(thunk)
     );
 

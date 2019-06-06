@@ -13,6 +13,11 @@ export const initialState = {
     error: null,
     isFetching: false,
   },
+  getRun: {
+    error: null,
+    isFetching: false,
+    payload: {},
+  },
   subroutine: {
     type: null,
     error: null,

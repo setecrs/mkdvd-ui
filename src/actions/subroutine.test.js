@@ -1,7 +1,7 @@
 /*eslint-env jest*/
 
-import rootReducer, { initialState } from '../reducers/index';
-import { createStore, applyMiddleware } from 'redux';
+import { reducers, initialState } from '../reducers/index';
+import { combineReducers, createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import {
   subroutineStart,
@@ -16,7 +16,7 @@ import nock from 'nock';
 describe('subroutine', () => {
   it('subroutineStart', () => {
     const store = createStore(
-      rootReducer,
+      combineReducers({...reducers}),
       applyMiddleware(thunk)
     );
 
@@ -34,7 +34,7 @@ describe('subroutine', () => {
   });
   it('subroutineCancel', () => {
     const store = createStore(
-      rootReducer,
+      combineReducers({...reducers}),
       applyMiddleware(thunk)
     );
 
@@ -53,7 +53,7 @@ describe('subroutine', () => {
   });
   it('subroutineDone', () => {
     const store = createStore(
-      rootReducer,
+      combineReducers({...reducers}),
       applyMiddleware(thunk)
     );
 
@@ -70,31 +70,30 @@ describe('subroutine', () => {
       },
     }));
   });
-  it('subroutine', done => {
+  it('subroutine', async (done) => {
     nock(process.env.REACT_APP_APIURL)
+      .log(console.log)
       .post('/v2/directory', {
         action: 'mkDVD',
         path: '/operacoes/'
       })
       .reply(200);
     const store = createStore(
-      rootReducer,
+      combineReducers({...reducers}),
       applyMiddleware(thunk)
     );
-    store.dispatch(subroutine('mkDVD'));
-    store.subscribe(() => {
-      const state = store.getState();
-      expect(state).toEqual(Object.assign({},initialState,{
-        subroutine:{
-          type: null,
-          success: 'mkDVD',
-          isFetching: false,
-          error: null,
-          parameters: {}
-        },
-      }));
-      done();
-    });
+    await store.dispatch(subroutine({type:'mkDVD', path:'/operacoes/'}));
+    const state = store.getState();
+    expect(state).toEqual(Object.assign({},initialState,{
+      subroutine:{
+        type: null,
+        success: 'mkDVD',
+        isFetching: false,
+        error: null,
+        parameters: {}
+      },
+    }));
+    done();
   });
   it('subroutine with 400', done => {
     nock(process.env.REACT_APP_APIURL)
@@ -116,10 +115,10 @@ describe('subroutine', () => {
         }
       });
     const store = createStore(
-      rootReducer,
+      combineReducers({...reducers}),
       applyMiddleware(thunk)
     );
-    store.dispatch(subroutine('mv'));
+    store.dispatch(subroutine({type:'mv', path:'/operacoes/'}));
     store.subscribe(() => {
       const state = store.getState();
       expect(state).toEqual(Object.assign({},initialState,{
@@ -146,7 +145,7 @@ describe('subroutine', () => {
   });
   it('subroutineParameters', done => {
     const store = createStore(
-      rootReducer,
+      combineReducers({...reducers}),
       applyMiddleware(thunk)
     );
     store.dispatch(subroutineStart('mv'));
@@ -198,7 +197,7 @@ describe('subroutine', () => {
   });
   it('subroutineSetParameter', done => {
     const store = createStore(
-      rootReducer,
+      combineReducers({...reducers}),
       applyMiddleware(thunk)
     );
     store.dispatch(subroutineStart('mv'));
@@ -239,7 +238,7 @@ describe('subroutine', () => {
   });
   it('subroutineDone erase parameters', done => {
     const store = createStore(
-      rootReducer,
+      combineReducers({...reducers}),
       applyMiddleware(thunk)
     );
     store.dispatch(subroutineStart('mv'));

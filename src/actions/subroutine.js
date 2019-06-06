@@ -35,39 +35,27 @@ export const subroutineDone = () => ({
   type: SUBROUTINE_DONE
 });
 
-export const subroutine = (path, type) => (dispatch, getState) => {
-  dispatch(subroutineStart(type));
+export const subroutine = ({path, type}) => async (dispatch, getState) => {
+  await dispatch(subroutineStart(type));
   const state = getState();
-  return apiSubroutine(type, path, state.subroutine.parameters)
-    .then(res => {
-      if (!res.ok) {
-        return res.json().then(json => {
-          if (res.status === 400 && "parameters" in json) {
-            return dispatch(subroutineParameters(json.parameters));
-          }
-          return dispatch(subroutineCancel(json.message));
-        });
+  try {
+    const res = await apiSubroutine(type, path, state.subroutine.parameters)
+    if (!res.ok) {
+      const json = await res.json()
+      if (res.status === 400 && "parameters" in json) {
+        return await dispatch(subroutineParameters(json.parameters));
       }
-      return Promise.resolve()
-        .then(() => {
-          if (type === "mv") {
-            return res
-              .json()
-              .then(json => json.destination)
-              .then(destination => {
-                return dispatch(chdir(ospath.dirname(destination)));
-              })
-              .catch(() => {
-                return dispatch(getDir());
-              });
-          } else {
-            return dispatch(getDir());
-          }
-        })
-        .then(() => dispatch(subroutineStart(type)))
-        .then(() => dispatch(subroutineDone()));
-    })
-    .catch(error => {
-      dispatch(subroutineCancel(error));
-    });
+      return await dispatch(subroutineCancel(json.message));
+    }
+    if (type === "mv") {
+      const json = await res.json()
+      const destination = json.destination
+      await dispatch(chdir(ospath.dirname(destination)));
+    }
+    await dispatch(subroutineStart(type))
+    return await dispatch(subroutineDone())
+  } catch (error) {
+    await dispatch(subroutineCancel(error));
+    return await dispatch(getDir());
+  }
 };

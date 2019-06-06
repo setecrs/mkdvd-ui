@@ -9,7 +9,7 @@ import Success from './success';
 
 import 'bootstrap/dist/css/bootstrap.css';
 // import 'glyphicons/glyphicons';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './app.css';
 
 const App = ({
@@ -30,7 +30,7 @@ const App = ({
   <div>
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        {/* <img src={logo} className="App-logo" alt="logo" /> */}
       </header>
     </div>
     <div className="container">
