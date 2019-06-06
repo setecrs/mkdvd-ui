@@ -19,6 +19,7 @@ events { worker_connections 1024; }\n\
 http {\n\
     server{\n\
         listen 80;\n\
+        error_page 404 /index.html;\n\
         location ~ \\.css {\n\
             include  /etc/nginx/mime.types;\n\
             add_header  Content-Type    text/css;\n\
