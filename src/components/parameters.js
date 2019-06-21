@@ -10,7 +10,7 @@ export const Parameters = ({
   changeParameter
 }) => {
   if ((!parameters) || (Object.keys(parameters).length === 0)) {
-    return '';
+    return <div/>;
   }
   return (
     <div className="parameterForm row container">

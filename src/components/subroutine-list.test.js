@@ -14,7 +14,6 @@ describe('SubroutineList', () => {
       <SubroutineList
         path="/"
         subroutineClick={subroutineClick}
-        chdir={chdir}
         subroutines={['mkDVD', 'test']}
       />
     );
@@ -26,7 +25,6 @@ describe('SubroutineList', () => {
       <SubroutineList
         path="/operacoes/"
         subroutineClick={subroutineClick}
-        chdir={chdir}
         subroutines={['mkDVD', 'test']}
       />
     );

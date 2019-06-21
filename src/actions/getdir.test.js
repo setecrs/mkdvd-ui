@@ -71,6 +71,7 @@ describe('getDir', () => {
     }));
   });
   it('getDir', done => {
+    process.env.REACT_APP_APIURL = process.env.REACT_APP_APIURL || "http://localhost"
     nock(process.env.REACT_APP_APIURL)
       .get('/v2/directory?path=%2F')
       .reply(200, {

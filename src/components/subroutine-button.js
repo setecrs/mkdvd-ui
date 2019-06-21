@@ -10,7 +10,6 @@ const SubroutineButton = ({
   <button
     type="button"
     className="subroutine-btn btn btn-default"
-    href="#"
     onClick={() => subroutineClick(path, subroutine)}
   >
     {label || subroutine}
