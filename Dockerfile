@@ -29,12 +29,54 @@ http {\n\
             include  /etc/nginx/mime.types;\n\
             add_header  Content-Type    application/x-javascript;\n\
             root /usr/local/src/build ;\n\
+            if ($request_method = 'OPTIONS') {\n\
+                add_header 'Access-Control-Allow-Origin' '*';\n\
+                add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';\n\
+                add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';\n\
+                add_header 'Access-Control-Max-Age' 1728000;\n\
+                add_header 'Content-Type' 'text/plain; charset=utf-8';\n\
+                add_header 'Content-Length' 0;\n\
+                return 204;\n\
+            }\n\
+            if ($request_method = 'POST') {\n\
+                add_header 'Access-Control-Allow-Origin' '*' always;\n\
+                add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS' always;\n\
+                add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range' always;\n\
+                add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range' always;\n\
+             }\n\
+            if ($request_method = 'GET') {\n\
+                add_header 'Access-Control-Allow-Origin' '*' always;\n\
+               add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS' always;\n\
+                add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range' always;\n\
+                add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range' always;\n\
+             }\n\
         }\n\
         location / {\n\
             include  /etc/nginx/mime.types;\n\
             add_header Service-Worker-Allowed / ;\n\
             root /usr/local/src/build ;\n\
             index index.html ;\n\
+            if ($request_method = 'OPTIONS') {\n\
+                add_header 'Access-Control-Allow-Origin' '*';\n\
+                add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';\n\
+                add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';\n\
+                add_header 'Access-Control-Max-Age' 1728000;\n\
+                add_header 'Content-Type' 'text/plain; charset=utf-8';\n\
+                add_header 'Content-Length' 0;\n\
+                return 204;\n\
+            }\n\
+            if ($request_method = 'POST') {\n\
+                add_header 'Access-Control-Allow-Origin' '*' always;\n\
+                add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS' always;\n\
+                add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range' always;\n\
+                add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range' always;\n\
+             }\n\
+            if ($request_method = 'GET') {\n\
+                add_header 'Access-Control-Allow-Origin' '*' always;\n\
+               add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS' always;\n\
+                add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range' always;\n\
+                add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range' always;\n\
+             }\n\
         }\n\
     }\n\
 }\n\
